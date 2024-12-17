@@ -1,5 +1,6 @@
 # NewsAPI Client
 
+> [!NOTE]
 > This README.md provides a clear overview of the package, installation steps, and usage instructions.
 
 NewsAPI Client is a TypeScript-based client for interacting with the NewsAPI service. It simplifies fetching news articles, top headlines, and news sources while handling API errors gracefully.
@@ -138,27 +139,35 @@ The package includes Jest tests for all functions. To run tests:
     npm run test
 ```
 
-Tests use Jest's mocking feature to simulate API calls without hitting the actual NewsAPI service.
+> [!NOTE]  
+> Tests use Jest's mocking feature to simulate API calls without hitting the actual NewsAPI service.
 
-## Contributing
+## Update Package
 
-1. Fork the repository.
-2. Create a new feature branch:
-
-```bash
-    git checkout -b feature/new-feature
-```
-
-3. Commit changes:
+1. Add git changes
 
 ```bash
-    git commit -m "Add new feature"
+    git add .
 ```
+
+2. Commit changes:
+
+```bash
+    git commit -s -m "Add new changes"
+```
+
+3. Bump the package version with this command:
+
+```bash
+    npm run bump
+```
+
+> [!IMPORTANT]
+> The above command will update/increase the version number of the package.json and package-lock.json files and also commit the changes to git.
 
 4. Push to your fork:
 
 ```bash
-git push origin feature/new-feature
+git push --tags #push tag created from the bump command
+git push origin main
 ```
-
-5. Open a pull request.
