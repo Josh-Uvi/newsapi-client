@@ -1,11 +1,12 @@
 {
   "name": "@josh-uvi/newsapi-client",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "test": "jest",
-    "clean": "rimraf dist"
+    "clean": "rimraf dist",
+    "bump": "npm version patch"
   },
   "keywords": [],
   "author": "Josh Uvi",
