@@ -13,6 +13,10 @@
     "url": "https://github.com/Josh-Uvi/newsapi-client.git"
   },
   "license": "ISC",
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "publishConfig": {
     "@josh-uvi:registry": "https://npm.pkg.github.com"
   },
