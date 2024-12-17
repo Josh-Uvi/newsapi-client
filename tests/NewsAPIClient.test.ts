@@ -1,8 +1,5 @@
 import axios from "axios";
 import { NewsAPIClient } from "../src/NewsAPIClient";
-import { config } from "dotenv";
-
-config();
 
 jest.mock("axios", () => {
   return {
@@ -13,7 +10,7 @@ jest.mock("axios", () => {
 
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
-const apiKey = process.env.NEWS_API_KEY;
+const apiKey = "something random";
 
 describe("NewsAPIClient", () => {
   let client: NewsAPIClient;
@@ -56,7 +53,7 @@ describe("NewsAPIClient", () => {
     expect(response.articles.length).toBe(2);
     expect(response.articles[0].title).toBe("Article 1");
 
-    // Ensure Axios get was called with the correct URL
+    // Check Axios.get() was called with the correct URL and parameter
     expect(mockedAxios.get).toHaveBeenCalledWith("/top-headlines", {
       params: { country: "us" },
     });
@@ -120,7 +117,7 @@ describe("NewsAPIClient", () => {
       "Network Error"
     );
 
-    // Ensure Axios get was called with the correct URL
+    // Check Axios.get() was called with the correct URL
     expect(mockedAxios.get).toHaveBeenCalledWith("/top-headlines", {
       params: { country: "us" },
     });

@@ -5,8 +5,9 @@ export class NewsAPIClient {
   private apiKey: string;
   private client: AxiosInstance;
 
-  constructor(apiKey?: string) {
-    this.apiKey = apiKey || "";
+  constructor(apiKey: string) {
+    this.apiKey = apiKey;
+
     if (!this.apiKey) {
       throw new Error("API key is required");
     }
