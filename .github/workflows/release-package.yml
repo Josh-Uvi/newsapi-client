@@ -2,8 +2,8 @@ name: Node.js Package
 
 on:
   push:
-    branches:
-      - main
+    branches: ["main"]
+    paths: ["src/**", "test/**", "!.github/workflows/**", "!README.md"]
 
 jobs:
   build:

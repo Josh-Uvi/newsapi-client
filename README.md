@@ -1,8 +1,5 @@
 # NewsAPI Client
 
-> [!NOTE]
-> This README.md provides a clear overview of the package, installation steps, and usage instructions.
-
 NewsAPI Client is a TypeScript-based client for interacting with the NewsAPI service. It simplifies fetching news articles, top headlines, and news sources while handling API errors gracefully.
 
 ### Features
