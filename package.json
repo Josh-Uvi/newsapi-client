@@ -1,6 +1,6 @@
 {
-  "name": "@uvi/newsapi-client",
-  "version": "1.0.0",
+  "name": "@josh-uvi/newsapi-client",
+  "version": "0.0.1",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
@@ -9,7 +9,13 @@
   },
   "keywords": [],
   "author": "Josh Uvi",
+  "repository": {
+    "url": "https://github.com/Josh-Uvi/newsapi-client.git"
+  },
   "license": "ISC",
+  "publishConfig": {
+    "@josh-uvi:registry": "https://npm.pkg.github.com"
+  },
   "description": "",
   "dependencies": {
     "axios": "^1.7.7"
