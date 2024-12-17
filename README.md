@@ -42,8 +42,6 @@ To install the package, run:
 
 ## Usage
 
-### Setup
-
 1. Import the Client:
 
 ```ts
