@@ -6,7 +6,7 @@
     "build": "tsc",
     "test": "jest",
     "clean": "rimraf dist",
-    "bump": "npm version patch"
+    "bumpVersion": "npm version patch"
   },
   "keywords": [],
   "author": "Josh Uvi",

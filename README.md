@@ -55,7 +55,7 @@ const client = new NewsAPIClient("<YOUR_NEWSAPI_KEY>");
 #### Example Usage in Real Applications
 
 ```ts
-import { NewsAPIClient } from "@<your-github-username>/newsapi-client";
+import { NewsAPIClient } from "@josh-uvi/newsapi-client";
 
 (async () => {
   const client = new NewsAPIClient("<YOUR_NEWSAPI_KEY>");
@@ -159,7 +159,7 @@ The package includes Jest tests for all functions. To run tests:
 3. Bump the package version with this command:
 
 ```bash
-    npm run bump
+    npm run bumpVersion
 ```
 
 > [!IMPORTANT]
