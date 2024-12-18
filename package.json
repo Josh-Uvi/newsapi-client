@@ -5,13 +5,14 @@
   "scripts": {
     "build": "tsc",
     "test": "jest",
-    "clean": "rimraf dist"
+    "cleanup": "rimraf dist",
+    "bumpVersion": "npm --no-git-tag-version version patch"
   },
   "keywords": [],
   "author": "Josh Uvi",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Josh-Uvi/newsapi-client.git"
+    "url": "https://github.com/Josh-Uvi/newsapi-client.git"
   },
   "license": "ISC",
   "files": [
