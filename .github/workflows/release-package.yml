@@ -3,6 +3,7 @@ name: Node.js Package
 on:
   push:
     branches: ["main"]
+    tags: ["v*"]
     paths-ignore: ["!README.md"]
 
 jobs:
@@ -37,7 +38,7 @@ jobs:
 
   release:
     needs: checkVersion
-    if: ${{ needs.checkVersion.steps.check.outputs.changed == 'true' }}
+    if: ${{ github.ref == 'refs/heads/main' }}
     name: Create release notes
     runs-on: ubuntu-latest
     permissions:
@@ -56,7 +57,7 @@ jobs:
 
   publish-gpr:
     needs: checkVersion
-    if: ${{ needs.checkVersion.steps.check.outputs.changed == 'true' }}
+    if: ${{ github.ref == 'refs/heads/main' }}
     name: Publish package
     runs-on: ubuntu-latest
     permissions:
