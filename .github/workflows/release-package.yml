@@ -24,7 +24,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Necessary so we have commit history to compare to
+          fetch-depth: 0 # Necessary so we have commit history to compare to.
       - name: Check if version has been updated
         id: check
         uses: EndBug/version-check@v2
