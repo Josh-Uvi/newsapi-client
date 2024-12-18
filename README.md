@@ -1,5 +1,7 @@
 # NewsAPI Client
 
+[![Node.js Package](https://github.com/Josh-Uvi/newsapi-client/actions/workflows/release-package.yml/badge.svg)](https://github.com/Josh-Uvi/newsapi-client/actions/workflows/release-package.yml)
+
 NewsAPI Client is a TypeScript-based client for interacting with the NewsAPI service. It simplifies fetching news articles, top headlines, and news sources while handling API errors gracefully.
 
 ### Features
