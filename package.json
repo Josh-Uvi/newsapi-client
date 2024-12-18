@@ -22,7 +22,7 @@
   "publishConfig": {
     "@josh-uvi:registry": "https://npm.pkg.github.com"
   },
-  "description": "",
+  "description": "NewsAPI Client is a TypeScript-based client for interacting with the NewsAPI service. It simplifies fetching news articles, top headlines, and news sources while handling API errors gracefully.",
   "dependencies": {
     "axios": "^1.7.7"
   },

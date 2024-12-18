@@ -3,7 +3,6 @@ name: Node.js Package
 on:
   push:
     branches: ["main"]
-    paths: ["src/**", "test/**", "!.github/workflows/**", "!README.md"]
 
 jobs:
   build:
@@ -15,15 +14,25 @@ jobs:
           node-version: 20
       - run: npm ci
       - run: npm test
+      - name: Check if version has been updated
+        id: check
+        uses: EndBug/version-check@v2
+      - name: Log when changed
+        if: steps.check.outputs.changed == 'true'
+        run: 'echo "Version change found in commit ${{ steps.check.outputs.commit }}! New version: ${{ steps.check.outputs.version }} (${{ steps.check.outputs.type }})"'
+      - name: Log when unchanged
+        if: steps.check.outputs.changed == 'false'
+        run: 'echo "No version change :/"'
 
   release:
-    if: ${{ ! startsWith(github.ref, 'refs/tags/')}}
+    if: ${{ steps.check.outputs.changed == 'true' }}
     name: Release pushed tag
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
       - name: Create release
+        if: ${{ ! startsWith(github.ref, 'refs/tags/')}}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.ref_name }}
@@ -34,7 +43,7 @@ jobs:
               --generate-notes
 
   publish-gpr:
-    needs: build
+    if: ${{ steps.check.outputs.changed == 'true' }}
     runs-on: ubuntu-latest
     permissions:
       packages: write
