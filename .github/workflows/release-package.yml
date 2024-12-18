@@ -43,7 +43,7 @@ jobs:
               --generate-notes
 
   publish-gpr:
-    if: ${{ steps.check.outputs.changed == 'true' }}
+    if: steps.check.outputs.changed == 'true'
     runs-on: ubuntu-latest
     permissions:
       packages: write
