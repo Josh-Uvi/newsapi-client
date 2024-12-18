@@ -36,14 +36,14 @@ jobs:
 
   release:
     needs: checkVersion
-    if: ${{ ! startsWith(github.ref, 'refs/tags/')}}
+    if: needs.checkVersion.steps.check.outputs.changed == 'true'
     name: Create release notes
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
       - name: Create release
-        if: steps.check.outputs.changed == 'true'
+        if: ${{ ! startsWith(github.ref, 'refs/tags/')}}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.ref_name }}
@@ -54,7 +54,8 @@ jobs:
               --generate-notes
 
   publish-gpr:
-    needs: release
+    needs: checkVersion
+    if: needs.checkVersion.steps.check.outputs.changed == 'true'
     name: Publish package
     runs-on: ubuntu-latest
     permissions:
@@ -67,8 +68,6 @@ jobs:
           node-version: 20
           registry-url: https://npm.pkg.github.com/
       - run: npm ci
-      - name: Run Publish
-        if: steps.check.outputs.changed == 'true'
-        run: npm publish
+      - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
