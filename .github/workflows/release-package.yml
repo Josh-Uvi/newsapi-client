@@ -36,6 +36,8 @@ jobs:
         run: |
           export PACKAGE_VERSION=$(cat package.json | grep version | head -1 | awk -F= "{ print $2 }" | sed 's/[version:,\",]//g' | tr -d '[[:space:]]')
           echo $PACKAGE_VERSION # should print your version e.g. 1.0.0
+        env: |
+          PACKAGE_VERSION: ${{ env.PACKAGE_VERSION }}
 
       # Commit changes
       - name: Commit changes
@@ -55,6 +57,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ env.PACKAGE_VERSION }}
         run: |
+          echo needs.build.steps.bumpVersion.output.results
           gh release create "$tag" \
               --repo="$GITHUB_REPOSITORY" \
               --title="${tag#v}" \
