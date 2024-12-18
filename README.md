@@ -153,6 +153,9 @@ The package includes Jest tests for all functions. To run tests:
     git commit -s -m "Add new changes"
 ```
 
+> [!NOTE]
+> The below command will update/increase the version number of the package.json and package-lock.json files and also commit the changes to git
+
 3. Bump the package version with this command:
 
 ```bash
@@ -160,7 +163,7 @@ The package includes Jest tests for all functions. To run tests:
 ```
 
 > [!IMPORTANT]
-> The above command will update/increase the version number of the package.json and package-lock.json files and also commit the changes to git.
+> It is **mandatory** to run the above command to trigger a new release of the package from the CI.
 
 4. Push to your fork:
 
