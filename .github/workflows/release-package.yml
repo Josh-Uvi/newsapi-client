@@ -14,27 +14,34 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - run: npm ci
       - run: npm run test
       - run: npm run cleanup
       - run: npm run build
-      # - run: npm run bumpVersion
       # Configure Git
-      # - name: Git configuration
-      #   run: |
-      #     git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-      #     git config --global user.name "GitHub Actions"
-      # - name: Bump Package Version
-      #   id: bumpVersion
-      #   run: npm run bumpVersion
-      - name: Bump release version
-        id: bumpVersion
+      - name: Git configuration
         run: |
-          echo "NEW_VERSION=$(npm version $RELEASE_TYPE)" >> $GITHUB_ENV
-          echo "RELEASE_TAG=$NEW_VERSION" >> $GITHUB_ENV
-          cat $NEW_VERSION
-        env:
-          RELEASE_TYPE: patch
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "GitHub Actions"
+
+      - name: Bump Package Version
+        id: bumpVersion
+        run: npm run bumpVersion
+
+      - name: Check package version
+        id: checkVersion
+        run: |
+          export PACKAGE_VERSION=$(cat package.json | grep version | head -1 | awk -F= "{ print $2 }" | sed 's/[version:,\",]//g' | tr -d '[[:space:]]')
+          echo $PACKAGE_VERSION # should print your version e.g. 1.0.0
+
+      # Commit changes
+      - name: Commit changes
+        run: |
+          git add -A
+          git commit -m "chore: release ${{ env.PACKAGE_VERSION }}"
 
   releaseNote:
     needs: build
@@ -46,7 +53,7 @@ jobs:
       - name: Create release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          tag: needs.build.steps.bumpVersion.output
+          tag: ${{ env.PACKAGE_VERSION }}
         run: |
           gh release create "$tag" \
               --repo="$GITHUB_REPOSITORY" \
