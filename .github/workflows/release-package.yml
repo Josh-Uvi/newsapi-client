@@ -25,7 +25,7 @@ jobs:
           echo "NEW_VERSION=$(npm --no-git-tag-version version $RELEASE_TYPE)" >> $GITHUB_ENV
           echo "RELEASE_TAG=latest" >> $GITHUB_ENV
         env:
-          RELEASE_TYPE: ${{ github.event.inputs.release-type }}
+          RELEASE_TYPE: patch
 
   releaseNote:
     needs: build
