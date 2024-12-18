@@ -28,11 +28,11 @@ jobs:
       #   id: bumpVersion
       #   run: npm run bumpVersion
       - name: Bump release version
+        id: bumpVersion
         run: |
-          echo "NEW_VERSION=$(npm --no-git-tag-version version $RELEASE_TYPE)" >> $GITHUB_ENV
+          echo "NEW_VERSION=$(npm version $RELEASE_TYPE)" >> $GITHUB_ENV
           echo "RELEASE_TAG=$NEW_VERSION" >> $GITHUB_ENV
           cat $NEW_VERSION
-          cat $RELEASE_TAG
         env:
           RELEASE_TYPE: patch
 
@@ -46,7 +46,7 @@ jobs:
       - name: Create release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          tag: $RELEASE_TAG
+          tag: needs.build.steps.bumpVersion.output
         run: |
           gh release create "$tag" \
               --repo="$GITHUB_REPOSITORY" \
