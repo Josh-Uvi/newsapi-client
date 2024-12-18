@@ -38,7 +38,6 @@ jobs:
 
   release:
     needs: checkVersion
-    if: ${{ ! startsWith(github.ref, 'refs/tags/')}}
     name: Create release notes
     runs-on: ubuntu-latest
     permissions:
