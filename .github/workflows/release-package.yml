@@ -44,7 +44,6 @@ jobs:
       contents: write
     steps:
       - name: Create release
-
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.ref_name }}
