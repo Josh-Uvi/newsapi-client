@@ -64,9 +64,9 @@ jobs:
         run: 'echo "No version change :/"'
 
   publish-gpr:
-    needs: checkVersion
+    needs: releaseNote
     name: Publish package
-    if: steps.check.outputs.changed == 'true' # Publish when package version number changed
+    if: github.repository_owner == 'josh-uvi' #safeguard for forks
     runs-on: ubuntu-latest
     permissions:
       packages: write
@@ -78,7 +78,7 @@ jobs:
           node-version: 20
           registry-url: https://npm.pkg.github.com/
       - name: start ci
-        if: github.repository_owner == 'josh-uvi' #safeguard for forks
+        if: steps.check.outputs.changed == 'true' # Publish when package version number changed
         run: npm ci
       - run: npm publish
         env:
