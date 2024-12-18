@@ -37,7 +37,7 @@ jobs:
 
   release:
     needs: checkVersion
-    if: ${{ always() && contains(needs.checkVersion.steps.check.outputs.changed), 'true') }}
+    if: ${{ always() && contains(join(needs.checkVersion.steps.check.outputs.changed, ','), 'true') }}
     name: Create release notes
     runs-on: ubuntu-latest
     permissions:
