@@ -16,14 +16,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Git configuration
-        run: |
-          git config --global user.email "${GH_USERNAME}@users.noreply.github.com"
-          git config --global user.name "${GH_USERNAME}"
-        env:
-          GH_USERNAME: ${{ github.actor }}
+      # - name: Git configuration
+      #   run: |
+      #     git config --global user.email "${GH_USERNAME}@users.noreply.github.com"
+      #     git config --global user.name "${GH_USERNAME}"
+      #   env:
+      #     GH_USERNAME: ${{ github.actor }}
       - run: npm ci
       - run: npm run test
       - run: npm run cleanup
@@ -55,11 +53,11 @@ jobs:
               --repo="$GITHUB_REPOSITORY" \
               --title="${tag}" \
               --generate-notes
-      - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: (chore)':' release '-' ${{ needs.build.outputs.new-version }}
-          branch: main
+      # - name: Commit changes
+      #   uses: stefanzweifel/git-auto-commit-action@v5
+      #   with:
+      #     commit_message: (chore)':' release '-' ${{ needs.build.outputs.new-version }}
+      #     branch: main
 
   publish-gpr:
     needs: releaseNote
