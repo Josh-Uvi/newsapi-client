@@ -41,6 +41,7 @@ jobs:
         run: |
           echo "New version number: ${{ steps.bumpVersion.outputs.new-version }}"
 
+<<<<<<< Updated upstream
       - name: Commit changes
         run: |
           git add -A
@@ -51,6 +52,8 @@ jobs:
         run: |
           git push origin main
 
+=======
+>>>>>>> Stashed changes
   releaseNote:
     needs: build
     name: Create release notes
@@ -58,6 +61,9 @@ jobs:
     permissions:
       contents: write
     steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
       - name: Create release and tag
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -67,6 +73,11 @@ jobs:
               --repo="$GITHUB_REPOSITORY" \
               --title="${tag}" \
               --generate-notes
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: (chore)':' release '-' ${{ needs.build.outputs.new-version }}
+          branch: main
 
   publish-gpr:
     needs: releaseNote
