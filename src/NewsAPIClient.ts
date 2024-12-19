@@ -1,6 +1,5 @@
 import axios, { AxiosInstance } from "axios";
 import { NewsResponse, SourcesResponse } from "./types";
-// add some comments!
 
 export class NewsAPIClient {
   private apiKey: string;
