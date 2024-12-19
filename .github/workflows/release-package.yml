@@ -10,7 +10,7 @@ jobs:
     name: Build package
     runs-on: ubuntu-latest
     outputs:
-      new-version: ${{ steps.bumpVersion.outputs.new-version }}
+      new-version: ${{ steps.newVersion.outputs.new-version }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -18,28 +18,19 @@ jobs:
           node-version: 22
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Git configuration
-        run: |
-          git config --global user.email "${GH_USERNAME}@users.noreply.github.com"
-          git config --global user.name "${GH_USERNAME}"
-        env:
-          GH_USERNAME: ${{ github.actor }}
-
       - run: npm ci
       - run: npm run test
       - run: npm run cleanup
       - run: npm run build
       - name: Bump Package Version
-        id: bumpVersion
-        run: |
-          npm run bumpVersion
-          PACKAGE_VERSION=$(node -p "require('./package.json').version")
-          echo "new-version=$PACKAGE_VERSION" >> "$GITHUB_OUTPUT"
-
+        run: npm run bumpVersion
       - name: Get new Version
         id: newVersion
         run: |
-          echo "New version number: ${{ steps.bumpVersion.outputs.new-version }}"
+          PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          echo "new-version=$PACKAGE_VERSION" >> "$GITHUB_OUTPUT"
+
+          echo "New version number: $PACKAGE_VERSION"
 
   releaseNote:
     needs: build

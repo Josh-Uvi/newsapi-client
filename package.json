@@ -6,7 +6,7 @@
     "build": "tsc",
     "test": "jest",
     "cleanup": "rimraf dist",
-    "bumpVersion": "npm --no-git-tag-version version patch"
+    "bumpVersion": "npm version patch"
   },
   "keywords": [
     "NewsAPI",
