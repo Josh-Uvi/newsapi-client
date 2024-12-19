@@ -1,6 +1,6 @@
 {
   "name": "@josh-uvi/newsapi-client",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -27,7 +27,7 @@
     "registry": "https://npm.pkg.github.com/@josh-uvi"
   },
   "files": [
-    "/dist"
+    "./dist"
   ],
   "description": "NewsAPI Client is a TypeScript-based client for interacting with the NewsAPI service. It simplifies fetching news articles, top headlines, and news sources while handling API errors gracefully.",
   "dependencies": {
