@@ -8,55 +8,41 @@ on:
 jobs:
   build:
     name: Build package
-    runs-on: ubuntu-latest
+    runs-on: Ubuntu 22.04
+    outputs:
+      new-version: ${{ steps.bumpVersion.outputs.new-version }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - run: npm ci
       - run: npm run test
       - run: npm run cleanup
       - run: npm run build
-      # Configure Git
-      - name: Git configuration
-        run: |
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "GitHub Actions"
-
       - name: Bump Package Version
         id: bumpVersion
-        run: npm run bumpVersion
-
-      - name: Check package version
-        id: checkVersion
         run: |
-          export PACKAGE_VERSION=$(cat package.json | grep version | head -1 | awk -F= "{ print $2 }" | sed 's/[version:,\",]//g' | tr -d '[[:space:]]')
-          echo $PACKAGE_VERSION # should print your version e.g. 1.0.0
-          echo needs.build.steps.bumpVersion.output.results
-        env:
-          PACKAGE_VERSION: ${{ env.PACKAGE_VERSION }}
-
-      # Commit changes
-      - name: Commit changes
+          value=$(npm run bumpVersion)
+          echo "new-version=$value" >> "$GITHUB_OUTPUT"
+      - name: Get new Version
+      - id: newVersion
         run: |
-          git add -A
-          git commit -m "chore: release ${{ env.PACKAGE_VERSION }}"
+          echo "New version number: ${{ steps.bumpVersion.outputs.new-version }}"
 
   releaseNote:
     needs: build
     name: Create release notes
-    runs-on: ubuntu-latest
+    runs-on: Ubuntu 22.04
     permissions:
       contents: write
     steps:
       - name: Create release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          tag: needs.build.steps.bumpVersion.output.results
+          tag: ${{ needs.build.outputs.new-version }}
         run: |
           gh release create "$tag" \
               --repo="$GITHUB_REPOSITORY" \
@@ -67,7 +53,7 @@ jobs:
     needs: releaseNote
     name: Publish package
     if: github.repository_owner == 'josh-uvi' #safeguard for forks
-    runs-on: ubuntu-latest
+    runs-on: Ubuntu 22.04
     permissions:
       packages: write
       contents: read
@@ -75,7 +61,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           registry-url: https://npm.pkg.github.com/
           scope: "@josh-uvi"
       - name: start ci
