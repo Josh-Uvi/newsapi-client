@@ -25,8 +25,7 @@ jobs:
       - name: Bump Package Version
         id: bumpVersion
         run: |
-          value=$(npm run bumpVersion)
-          echo "new-version=$value" >> "$GITHUB_OUTPUT"
+          echo "new-version=$(npm run bumpVersion)" >> $GITHUB_ENV
       - name: Get new Version
         id: newVersion
         run: |
