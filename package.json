@@ -18,7 +18,7 @@
   "author": "Josh Uvi",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Josh-Uvi/newsapi-client.git"
+    "url": "git+https://github.com/Josh-Uvi/newsapi-client.git"
   },
   "license": "ISC",
   "files": [
