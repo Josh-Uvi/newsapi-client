@@ -1,6 +1,6 @@
 # NewsAPI Client
 
-[![Node.js Package](https://github.com/Josh-Uvi/newsapi-client/actions/workflows/release-package.yml/badge.svg)](https://github.com/Josh-Uvi/newsapi-client/actions/workflows/release-package.yml)
+[![Release Package](https://github.com/Josh-Uvi/newsapi-client/actions/workflows/release-package.yml/badge.svg)](https://github.com/Josh-Uvi/newsapi-client/actions/workflows/release-package.yml)
 
 NewsAPI Client is a TypeScript-based client for interacting with the NewsAPI service. It simplifies fetching news articles, top headlines, and news sources while handling API errors gracefully.
 
@@ -124,51 +124,38 @@ console.log(sources.sources);
 
 ## Testing
 
-The package includes Jest tests for all functions. To run tests:
+The package contains Jest tests for all functions, utilizing Jest's mocking capabilities to simulate API calls without interacting with the actual NewsAPI service.
 
-1. Install dependencies:
-
-```bash
-    npm install
-```
-
-2. Run the tests:
+To execute the tests:
 
 ```bash
     npm run test
 ```
 
-> [!NOTE]  
-> Tests use Jest's mocking feature to simulate API calls without hitting the actual NewsAPI service.
-
 ## Update Package
 
-1. Add git changes
+It is **essential** to follow the steps below in the specified order to initiate a new release of the package. The following command will update or increment the version number in the package.json and package-lock.json files.
 
-```bash
-    git add .
-```
-
-2. Commit changes:
-
-```bash
-    git commit -s -m "Add new changes"
-```
-
-> [!NOTE]
-> The below command will update/increase the version number of the package.json and package-lock.json files and also commit the changes to git
-
-3. Bump the package version with this command:
+1. Bump the package version with this command:
 
 ```bash
     npm run bumpVersion
 ```
 
-> [!IMPORTANT]
-> It is **mandatory** to run the above command to trigger a new release of the package from the CI.
+2. Add git changes
+
+```bash
+    git add -A
+```
+
+3. Commit changes:
+
+```bash
+    git commit -s -m "Add new changes"
+```
 
 4. Push changes:
 
 ```bash
-git push origin && git push --follow-tags
+    git push
 ```
