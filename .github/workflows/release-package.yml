@@ -3,7 +3,9 @@ name: Release Package
 on:
   push:
     branches: ["main"]
-    paths-ignore: ["!README.md"]
+    paths:
+      - "!README.md"
+      - "!.github/workflows/**"
 
 jobs:
   build:
