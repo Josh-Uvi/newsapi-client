@@ -28,7 +28,7 @@ jobs:
           value=$(npm run bumpVersion)
           echo "new-version=$value" >> "$GITHUB_OUTPUT"
       - name: Get new Version
-      - id: newVersion
+        id: newVersion
         run: |
           echo "New version number: ${{ steps.bumpVersion.outputs.new-version }}"
 
