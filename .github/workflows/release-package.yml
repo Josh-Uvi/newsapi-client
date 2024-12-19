@@ -25,7 +25,8 @@ jobs:
       - name: Bump Package Version
         id: bumpVersion
         run: |
-          export PACKAGE_VERSION=$(npm run bumpVersion)
+          # npm run bumpVersion
+          PACKAGE_VERSION=$(node -p "require('./package.json').version")
           echo "new-version=$PACKAGE_VERSION" >> "$GITHUB_OUTPUT"
 
       - name: Get new Version
@@ -47,7 +48,7 @@ jobs:
         run: |
           gh release create "$tag" \
               --repo="$GITHUB_REPOSITORY" \
-              --title="${tag#v}" \
+              --title="${tag}" \
               --generate-notes
 
   publish-gpr:
