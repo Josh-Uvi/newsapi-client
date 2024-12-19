@@ -19,7 +19,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: npm ci --frozen-lockfile
+      - run: npm ci
       - run: npm run test
       - run: npm run lint
       - run: npm run build
@@ -65,7 +65,7 @@ jobs:
           registry-url: https://npm.pkg.github.com/
           scope: "@josh-uvi"
       - name: start ci
-        run: npm ci --frozen-lockfile
+        run: npm ci
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
