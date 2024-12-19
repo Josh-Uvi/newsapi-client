@@ -65,7 +65,7 @@ jobs:
           registry-url: https://npm.pkg.github.com/
           scope: "@josh-uvi"
       - name: start ci
-        run: npm ci
+        run: npm install --frozen-lockfile
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
