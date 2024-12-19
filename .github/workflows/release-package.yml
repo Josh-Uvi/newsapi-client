@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     name: Build package
-    runs-on: Ubuntu 22.04
+    runs-on: ubuntu-latest
     outputs:
       new-version: ${{ steps.bumpVersion.outputs.new-version }}
     steps:
@@ -35,14 +35,10 @@ jobs:
   releaseNote:
     needs: build
     name: Create release notes
-    runs-on: Ubuntu 22.04
+    runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
       - name: Create release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -57,7 +53,7 @@ jobs:
     needs: releaseNote
     name: Publish package
     if: github.repository_owner == 'josh-uvi' #safeguard for forks
-    runs-on: Ubuntu 22.04
+    runs-on: ubuntu-latest
     permissions:
       packages: write
       contents: read
