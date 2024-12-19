@@ -28,8 +28,6 @@ jobs:
       - run: npm run test
       - run: npm run cleanup
       - run: npm run build
-      # - name: Bump Package Version
-      #   run: npm run bumpVersion
       - name: Get new Version
         id: newVersion
         run: |

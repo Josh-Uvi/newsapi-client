@@ -167,9 +167,8 @@ The package includes Jest tests for all functions. To run tests:
 > [!IMPORTANT]
 > It is **mandatory** to run the above command to trigger a new release of the package from the CI.
 
-4. Push to your fork:
+4. Push changes:
 
 ```bash
-git push --tags #push tag created from the bump command
-git push origin main
+git push origin && git push --follow-tags
 ```
