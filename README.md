@@ -19,8 +19,8 @@ This package is hosted on the GitHub Package Registry. To install it, ensure you
 
 #### Prerequisites
 
-1. Node.js: v20 or higher
-2. NPM: v10 or higher
+1. Node.js: [v20 or higher](https://nodejs.org/en/download/package-manager)
+2. NPM: [v10 or higher](https://docs.npmjs.com/cli/v8/commands/npm-version)
 3. GitHub Authentication:
 
    - Authenticate to GitHub by running:

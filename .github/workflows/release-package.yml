@@ -18,15 +18,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      # - name: Git configuration
-      #   run: |
-      #     git config --global user.email "${GH_USERNAME}@users.noreply.github.com"
-      #     git config --global user.name "${GH_USERNAME}"
-      #   env:
-      #     GH_USERNAME: ${{ github.actor }}
       - run: npm ci
       - run: npm run test
-      - run: npm run cleanup
       - run: npm run build
       - name: Get new Version
         id: newVersion
@@ -35,7 +28,6 @@ jobs:
           echo "new-version=$PACKAGE_VERSION" >> "$GITHUB_OUTPUT"
 
           echo "New version number: $PACKAGE_VERSION"
-
   releaseNote:
     needs: build
     name: Create release notes
@@ -55,12 +47,6 @@ jobs:
               --repo="$GITHUB_REPOSITORY" \
               --title="${tag}" \
               --generate-notes
-      # - name: Commit changes
-      #   uses: stefanzweifel/git-auto-commit-action@v5
-      #   with:
-      #     commit_message: (chore)':' release '-' ${{ needs.build.outputs.new-version }}
-      #     branch: main
-
   publish-gpr:
     needs: releaseNote
     name: Publish package
