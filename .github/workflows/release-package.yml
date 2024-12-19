@@ -25,7 +25,7 @@ jobs:
       - name: Bump Package Version
         id: bumpVersion
         run: |
-          # npm run bumpVersion
+          npm run bumpVersion
           PACKAGE_VERSION=$(node -p "require('./package.json').version")
           echo "new-version=$PACKAGE_VERSION" >> "$GITHUB_OUTPUT"
 
