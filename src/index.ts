@@ -1,2 +1,7 @@
-export { NewsAPIClient } from "./NewsAPIClient";
-export * from "./types";
+import { NewsAPIClient } from "./NewsAPIClient";
+import * as types from "./types";
+
+module.exports = {
+  NewsAPIClient,
+  types,
+};

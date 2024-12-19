@@ -17,16 +17,11 @@
   ],
   "author": "Josh Uvi",
   "repository": {
-    "type": "git",
     "url": "git+https://github.com/Josh-Uvi/newsapi-client.git"
   },
   "license": "ISC",
-  "files": [
-    "dist",
-    "README.md"
-  ],
   "publishConfig": {
-    "@josh-uvi:registry": "https://npm.pkg.github.com"
+    "registry": "https://npm.pkg.github.com/@josh-uvi"
   },
   "description": "NewsAPI Client is a TypeScript-based client for interacting with the NewsAPI service. It simplifies fetching news articles, top headlines, and news sources while handling API errors gracefully.",
   "dependencies": {

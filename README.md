@@ -65,7 +65,13 @@ import { NewsAPIClient } from "@josh-uvi/newsapi-client";
     const headlines = await client.getTopHeadlines({ country: "us" });
     console.log("Top Headlines:", headlines.articles);
   } catch (error) {
-    console.error("Error fetching headlines:", error.message);
+    if (error.response) {
+      // API responded with a status code outside 2xx range
+      console.error("API Error:", error.response.data);
+    } else {
+      // Network or other error
+      console.error("Error:", error.message);
+    }
   }
 })();
 ```
