@@ -21,18 +21,27 @@ This package is hosted on the GitHub Package Registry. To install it, ensure you
 
 1. Node.js: [v20 or higher](https://nodejs.org/en/download/package-manager)
 2. NPM: [v10 or higher](https://docs.npmjs.com/cli/v8/commands/npm-version)
-3. GitHub Authentication:
+3. Create a `.npmrc` file in the root directory of your app, then add the following
 
-   - Authenticate to GitHub by running:
+```bash
+@owner=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GH_TOKEN}
 
-   ```bash
-       npm login --registry=https://npm.pkg.github.com --scope=@<your-github-username>
+```
 
-   ```
+#### Optional
 
-   - Use your GitHub credentials (or a personal access token with the read:packages scope) for login.
+Login from the terminal with the below command.
 
-#### Install the Package
+Authenticate to GitHub by running:
+
+```bash
+    npm login --scope=@<your-github-username> --auth-type=legacy --registry=https://npm.pkg.github.com
+
+```
+
+> [!Note]
+> Use your GitHub credentials (or a [personal access token](https://github.com/settings/tokens/new) with the `read:packages` scope) for login.
 
 To install the package, run:
 

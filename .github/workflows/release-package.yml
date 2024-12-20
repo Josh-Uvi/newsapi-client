@@ -3,8 +3,8 @@ name: Release Package
 on:
   push:
     branches: ["main"]
-    # paths:
-    #   - "!README.md"
+    paths:
+      - "!README.md"
 
 concurrency: ${{ github.workflow }}-${{ github.ref }} #stops multiple job runs
 
